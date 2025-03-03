@@ -1,5 +1,7 @@
 import type { Metadata } from "next";
 import Head from "next/head";
+import { Analytics } from "@vercel/analytics/react";
+import { GoogleAnalytics } from "@next/third-parties/google";
 
 import "../../public/styles/global.scss";
 import "../../public/styles/components.scss";
@@ -35,6 +37,8 @@ export default function RootLayout({
           href="https://cdn.jsdelivr.net/gh/orioncactus/pretendard@v1.3.9/dist/web/variable/pretendardvariable.min.css"
         />
       </Head>
+      <Analytics />
+      <GoogleAnalytics gaId="G-6M2JP9HLCY" />
       <body>{children}</body>
     </html>
   );
