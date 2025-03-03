@@ -1,95 +1,42 @@
+"use client";
 import Image from "next/image";
-import styles from "./page.module.css";
+import logo from "../../public/images/logo.svg";
+import "../../public/styles/app/main/style.scss";
+import Button from "@/components/Button";
+import { WALLA } from "@/utils/const";
 
 export default function Home() {
-  return (
-    <div className={styles.page}>
-      <main className={styles.main}>
-        <Image
-          className={styles.logo}
-          src="/next.svg"
-          alt="Next.js logo"
-          width={180}
-          height={38}
-          priority
-        />
-        <ol>
-          <li>
-            Get started by editing <code>src/app/page.tsx</code>.
-          </li>
-          <li>Save and see your changes instantly.</li>
-        </ol>
+  const handleClick = () => {
+    window.open(WALLA);
+  };
 
-        <div className={styles.ctas}>
-          <a
-            className={styles.primary}
-            href="https://vercel.com/new?utm_source=create-next-app&utm_medium=appdir-template&utm_campaign=create-next-app"
-            target="_blank"
-            rel="noopener noreferrer"
-          >
-            <Image
-              className={styles.logo}
-              src="/vercel.svg"
-              alt="Vercel logomark"
-              width={20}
-              height={20}
-            />
-            Deploy now
-          </a>
-          <a
-            href="https://nextjs.org/docs?utm_source=create-next-app&utm_medium=appdir-template&utm_campaign=create-next-app"
-            target="_blank"
-            rel="noopener noreferrer"
-            className={styles.secondary}
-          >
-            Read our docs
-          </a>
+  return (
+    <section>
+      <article className="content-wrapper">
+        <div>
+          <Image
+            src={logo}
+            alt="네카라쿠배 공고 서비스 공식 로고"
+            layout="responsive"
+          />
+          <div className="text-wrapper">
+            <div>
+              <span>
+                네이버 · 카카오 · 라인 · 쿠팡 · 배달의민족 · 당근 · 토스와 같은
+                {"\n"}
+                <strong>빅테크 채용 공고</strong>를 한 눈에 확인해보세요
+              </span>
+              <span>
+                현재 여러 알찬 기능들을 위해 준비중이니 아래 버튼을 통해 사전{" "}
+                <strong>서비스 런칭</strong>을 빠르게 알려드릴 수 있어요!
+              </span>
+            </div>
+            <Button className="btn-schema-dark" onClick={handleClick}>
+              서비스 런칭 알림 받기
+            </Button>
+          </div>
         </div>
-      </main>
-      <footer className={styles.footer}>
-        <a
-          href="https://nextjs.org/learn?utm_source=create-next-app&utm_medium=appdir-template&utm_campaign=create-next-app"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          <Image
-            aria-hidden
-            src="/file.svg"
-            alt="File icon"
-            width={16}
-            height={16}
-          />
-          Learn
-        </a>
-        <a
-          href="https://vercel.com/templates?framework=next.js&utm_source=create-next-app&utm_medium=appdir-template&utm_campaign=create-next-app"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          <Image
-            aria-hidden
-            src="/window.svg"
-            alt="Window icon"
-            width={16}
-            height={16}
-          />
-          Examples
-        </a>
-        <a
-          href="https://nextjs.org?utm_source=create-next-app&utm_medium=appdir-template&utm_campaign=create-next-app"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          <Image
-            aria-hidden
-            src="/globe.svg"
-            alt="Globe icon"
-            width={16}
-            height={16}
-          />
-          Go to nextjs.org →
-        </a>
-      </footer>
-    </div>
+      </article>
+    </section>
   );
 }
