@@ -1,0 +1,43 @@
+.content-wrapper {
+  width: 100%;
+  height: 100%;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+
+  > div {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    row-gap: 3rem;
+    padding: 3rem;
+
+    .text-wrapper {
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      row-gap: 3rem;
+      font-size: 1.6rem;
+      letter-spacing: -0.03rem;
+      color: #222;
+
+      > div {
+        display: flex;
+        flex-direction: column;
+        row-gap: 0.8rem;
+        text-align: center;
+      }
+
+      > button {
+        width: 100%;
+        max-width: fit-content;
+      }
+    }
+
+    > img {
+      max-width: 50rem;
+    }
+  }
+}
