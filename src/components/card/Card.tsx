@@ -92,8 +92,17 @@ function CardContent({
   );
 }
 
+function CardSkeleton() {
+  return (
+    <div className={styles.card__wrapper}>
+      <div className="card__skeleton"></div>
+    </div>
+  );
+}
+
 const Card = Object.assign(CardContainer, {
   CardContent,
+  CardSkeleton,
 });
 
 export default Card;
