@@ -8,7 +8,7 @@ import axios, {
 import Cookies from "js-cookie";
 
 /** API 사용 전, ENV 파일을 통해 서버 연동 설정을 해주세요 */
-const API_URL = process.env.NEXT_PUBLIC_SERVICE_API as string;
+const API_URL = process.env.NEXT_PUBLIC_SERVICE_API as string || 'http://localhost:8080/api';
 
 export type ErrorResponse = { name: string; message: string };
 

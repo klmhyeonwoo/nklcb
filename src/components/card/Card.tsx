@@ -92,8 +92,20 @@ function CardContent({
   );
 }
 
+function CardSkeleton() {
+  return (
+    <div className={styles.card__container}>
+      <div className={styles.card__skeleton__item} style={{ width: '40%', height: '20px' }}></div>
+      <div className={styles.card__skeleton__item} style={{ width: '70%', height: '25px' }}></div>
+      <div className={styles.card__skeleton__item} style={{ width: '50%', height: '20px' }}></div>
+      <div className={styles.card__skeleton__item} style={{ width: '60%', height: '20px' }}></div>
+    </div>
+  );
+}
+
 const Card = Object.assign(CardContainer, {
   CardContent,
+  CardSkeleton,
 });
 
 export default Card;

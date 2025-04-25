@@ -3,7 +3,8 @@ import styles from "@/styles/components/tab.module.scss";
 import Tab from "./Tab";
 import useTab from "@/hooks/useTab";
 import { SERVICE_CATEGORY } from "@/utils/const";
-import { useRouter } from "next/navigation";
+import { useRouter, useSearchParams } from "next/navigation";
+import { useCallback } from "react";
 
 type TabData = {
   data: string[];
@@ -11,16 +12,24 @@ type TabData = {
 };
 
 function TabSection({ data, currentIndex }: TabData) {
+  const searchParams = useSearchParams();
   const router = useRouter();
   const { currentTab, setTab } = useTab({
     initialTab: currentIndex,
     totalTabs: data.length,
   });
 
-  const handleClickTab = (index: number) => {
-    setTab(index);
-    router.replace(`/?company=${data[index]}`);
-  };
+  const handleClickTab = useCallback((index: number) => {
+    // 현재 선택된 탭과 다를 때만 라우팅 변경
+    if (currentTab !== index) {
+      setTab(index);
+      
+      // URL 파라미터 변경
+      const params = new URLSearchParams(searchParams.toString());
+      params.set("company", data[index]);
+      router.push(`/?${params.toString()}`);
+    }
+  }, [currentTab, data, router, searchParams, setTab]);
 
   return (
     <div className={styles.tab__container}>

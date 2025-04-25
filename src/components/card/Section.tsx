@@ -17,7 +17,24 @@ type RecruitData = {
   endDate: string;
 };
 
-export default function CardSection({ data }: { data: RecruitData[] }) {
+type CardSectionProps = {
+  data: RecruitData[];
+  isLoading?: boolean;
+};
+
+export default function CardSection({ data, isLoading = false }: CardSectionProps) {
+  if (isLoading) {
+    return (
+      <section className={styles.card__section}>
+        {Array.from({ length: 4 }).map((_, index) => (
+          <Card key={`skeleton-${index}`}>
+            <Card.CardSkeleton />
+          </Card>
+        ))}
+      </section>
+    );
+  }
+
   return (
     <section className={styles.card__section}>
       {data.map((item) => (
