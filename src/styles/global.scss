@@ -1,3 +1,14 @@
+@font-face {
+  font-family: "PretendardVariable";
+  src: url("../../public/font/PretendardVariable.ttf") format("truetype");
+  font-style: normal;
+}
+
+body,
+html {
+  font-synthesis: none;
+}
+
 html {
   line-height: 1.15;
   -webkit-text-size-adjust: 100%;
@@ -9,7 +20,7 @@ body {
   margin: 0;
   width: 100dvw;
   height: 100dvh;
-  font-family: "Pretendard" !important;
+  font-family: "PretendardVariable";
   color: #222;
 }
 
