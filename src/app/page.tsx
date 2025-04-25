@@ -1,10 +1,10 @@
 import Image from "next/image";
 import logo from "../../public/images/logo.svg";
-import "../../public/styles/app/main/style.scss";
 import { SERVICE_CATEGORY } from "@/utils/const";
 import { api } from "@/api";
 import CardSection from "@/components/card/Section";
 import TabSection from "@/components/tab/Section";
+import "@/styles/style.scss";
 
 type paramsType = {
   searchParams: Promise<{ company?: string }>;
