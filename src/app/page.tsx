@@ -7,7 +7,7 @@ import CardSection from "@/components/card/Section";
 import TabSection from "@/components/tab/Section";
 
 type paramsType = {
-  searchParams: { company?: string };
+  searchParams: Promise<{ company?: string }>;
 };
 
 async function getRecruitData({ query = "naver" }: { query: string }) {
@@ -24,7 +24,7 @@ async function getRecruitData({ query = "naver" }: { query: string }) {
 }
 
 export default async function Home({ searchParams }: paramsType) {
-  const { company } = searchParams;
+  const { company } = await searchParams;
   const { data } = await getRecruitData({
     query: (company as keyof typeof SERVICE_CATEGORY) || "naver",
   });
