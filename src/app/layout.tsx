@@ -3,9 +3,10 @@ import Head from "next/head";
 import { Analytics } from "@vercel/analytics/react";
 import { GoogleAnalytics } from "@next/third-parties/google";
 
-import "../../public/styles/global.scss";
-import "../../public/styles/components.scss";
-import "../../public/styles/schema.scss";
+import "@/styles/global.scss";
+import "@/styles/components.scss";
+import "@/styles/schema.scss";
+import "@/styles/error.scss";
 
 export const metadata: Metadata = {
   title: "네카라쿠배 채용",
