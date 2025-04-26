@@ -95,7 +95,7 @@ function CardContent({
 function CardSkeleton() {
   return (
     <div className={styles.card__wrapper}>
-      <div className="card__skeleton"></div>
+      <div className={styles.card__skeleton}></div>
     </div>
   );
 }
