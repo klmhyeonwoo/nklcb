@@ -1,7 +1,7 @@
 "use client";
 
 import styles from "@/styles/components/card.module.scss";
-import icon_arrow from "../../../public/icon/arrow.svg";
+import icon_arrow from "../../../public/icon/arrow_white.svg";
 import icon_calendar from "../../../public/icon/calendar.svg";
 import icon_calendar_light from "../../../public/icon/calendar_light.svg";
 import icon_cube from "../../../public/icon/cube.svg";
@@ -72,7 +72,9 @@ function CardContent({
         />
         <span className={styles.card__timestamp}>
           {fromDate && toDate
-            ? `${fromDate} ~ ${toDate}`
+            ? `${fromDate} ~ ${
+                toDate.includes("2999") ? "채용 시 마감" : toDate
+              }`
             : "해당 공고는 상시 채용이에요."}
         </span>
       </div>
@@ -86,7 +88,7 @@ function CardContent({
           src={icon_arrow}
           alt="해당 모집 공고가 관심있다면 클릭해보세요"
         />
-        <span> 해당 모집 공고가 관심있다면 여기를 클릭해보세요 </span>
+        <span> 해당 모집 공고로 이동할 수 있어요 </span>
       </div>
     </div>
   );

@@ -5,6 +5,7 @@ import { api } from "@/api";
 import CardSection from "@/components/card/Section";
 import TabSection from "@/components/tab/Section";
 import "@/styles/style.scss";
+import SearchSection from "@/components/search/Section";
 
 type paramsType = {
   searchParams: Promise<{ company?: string }>;
@@ -17,7 +18,12 @@ async function getRecruitData({ query = "naver" }: { query: string }) {
         SERVICE_CATEGORY[query as keyof typeof SERVICE_CATEGORY].code
       }`
     );
-    return { data: response.data };
+
+    const category: Set<string> = new Set(
+      response.data.map((item: { subJobCdNm: string }) => item.subJobCdNm)
+    );
+
+    return { data: response.data, category };
   } catch (error) {
     return { data: [], error };
   }
@@ -25,7 +31,7 @@ async function getRecruitData({ query = "naver" }: { query: string }) {
 
 export default async function Home({ searchParams }: paramsType) {
   const { company } = await searchParams;
-  const { data } = await getRecruitData({
+  const { data, category } = await getRecruitData({
     query: (company as keyof typeof SERVICE_CATEGORY) || "naver",
   });
 
@@ -47,6 +53,7 @@ export default async function Home({ searchParams }: paramsType) {
               0
             )}
           />
+          <SearchSection data={category || new Set<string>()} />
           <CardSection data={data} />
         </div>
       </article>
