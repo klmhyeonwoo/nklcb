@@ -24,6 +24,14 @@ export const metadata: Metadata = {
     title: "네카라쿠배 채용",
     description: "내가 원했던 기업을 한 눈에 확인해보세요",
     type: "website",
+    images: [
+      {
+        url: "https://github.com/klmhyeonwoo/Asset-Archieve./blob/main/nklcb.png",
+        width: 1200,
+        height: 630,
+        alt: "네카라쿠배 채용 이미지",
+      },
+    ],
   },
 };
 
