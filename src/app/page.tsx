@@ -7,28 +7,12 @@ import TabSection from "@/components/tab/Section";
 import "@/styles/style.scss";
 import SearchSection from "@/components/search/Section";
 import { Metadata } from "next";
+import { Fragment, Suspense } from "react";
+import EyesLoading from "@/components/loading/EyesLoading";
 
 type paramsType = {
   searchParams: Promise<{ company?: string }>;
 };
-
-async function getRecruitData({ query = "naver" }: { query: string }) {
-  try {
-    const response = await api.get(
-      `list?company=${
-        SERVICE_CATEGORY[query as keyof typeof SERVICE_CATEGORY].code
-      }`
-    );
-
-    const category: Set<string> = new Set(
-      response.data.map((item: { subJobCdNm: string }) => item.subJobCdNm)
-    );
-
-    return { data: response.data, category };
-  } catch (error) {
-    return { data: [], error };
-  }
-}
 
 export async function generateMetadata({
   searchParams,
@@ -64,11 +48,39 @@ export async function generateMetadata({
   };
 }
 
-export default async function Home({ searchParams }: paramsType) {
-  const { company } = await searchParams;
+async function getRecruitData({ query = "naver" }: { query: string }) {
+  try {
+    const response = await api.get(
+      `list?company=${
+        SERVICE_CATEGORY[query as keyof typeof SERVICE_CATEGORY].code
+      }`
+    );
+
+    const category: Set<string> = new Set(
+      response.data.map((item: { subJobCdNm: string }) => item.subJobCdNm)
+    );
+
+    return { data: response.data, category };
+  } catch (error) {
+    return { data: [], error };
+  }
+}
+
+async function RecruitDataSection({ company }: { company?: string }) {
   const { data, category } = await getRecruitData({
     query: (company as keyof typeof SERVICE_CATEGORY) || "naver",
   });
+
+  return (
+    <Fragment>
+      <SearchSection data={category || new Set<string>()} />
+      <CardSection data={data} />
+    </Fragment>
+  );
+}
+
+export default async function Home({ searchParams }: paramsType) {
+  const { company } = await searchParams;
 
   return (
     <section>
@@ -88,8 +100,9 @@ export default async function Home({ searchParams }: paramsType) {
               0
             )}
           />
-          <SearchSection data={category || new Set<string>()} />
-          <CardSection data={data} />
+          <Suspense key={company} fallback={<EyesLoading />}>
+            <RecruitDataSection company={company} />
+          </Suspense>
         </div>
       </article>
     </section>

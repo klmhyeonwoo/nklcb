@@ -4,6 +4,7 @@ import Tab from "./Tab";
 import useTab from "@/hooks/useTab";
 import { SERVICE_CATEGORY } from "@/utils/const";
 import { useRouter } from "next/navigation";
+import { useMemo } from "react";
 
 type TabData = {
   data: string[];
@@ -22,23 +23,31 @@ function TabSection({ data, currentIndex }: TabData) {
     router.replace(`/?company=${data[index]}`);
   };
 
+  const tabs = useMemo(
+    () =>
+      data.map((key) => {
+        const categoryName = key as keyof typeof SERVICE_CATEGORY;
+        return {
+          name: SERVICE_CATEGORY[categoryName].name,
+          code: SERVICE_CATEGORY[categoryName].code,
+          index: data.indexOf(key),
+        };
+      }),
+    [data]
+  );
+
   return (
     <div className={styles.tab__container}>
-      {data.map((key, index) => {
-        const categoryName = key as keyof typeof SERVICE_CATEGORY;
-        const name = SERVICE_CATEGORY[categoryName].name;
-        const code = SERVICE_CATEGORY[categoryName].code;
-        return (
-          <Tab
-            key={index}
-            label={name}
-            value={code}
-            index={index}
-            active={currentTab}
-            onClick={() => handleClickTab(index)}
-          />
-        );
-      })}
+      {tabs.map(({ name, code, index }) => (
+        <Tab
+          key={code}
+          label={name}
+          value={code}
+          index={index}
+          active={currentTab}
+          onClick={() => handleClickTab(index)}
+        />
+      ))}
     </div>
   );
 }
