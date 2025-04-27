@@ -12,10 +12,6 @@ type paramsType = {
   searchParams: Promise<{ company?: string }>;
 };
 
-type GenerateMetadataProps = {
-  searchParams: { company?: string };
-};
-
 async function getRecruitData({ query = "naver" }: { query: string }) {
   try {
     const response = await api.get(
@@ -36,8 +32,8 @@ async function getRecruitData({ query = "naver" }: { query: string }) {
 
 export async function generateMetadata({
   searchParams,
-}: GenerateMetadataProps): Promise<Metadata> {
-  const company = searchParams.company || "네이버";
+}: paramsType): Promise<Metadata> {
+  const { company } = await searchParams;
   const companyName =
     SERVICE_CATEGORY[company as keyof typeof SERVICE_CATEGORY]?.name ||
     "네이버";
