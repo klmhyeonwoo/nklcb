@@ -26,7 +26,7 @@ export const metadata: Metadata = {
     type: "website",
     images: [
       {
-        url: "https://github.com/klmhyeonwoo/Asset-Archieve./blob/main/nklcb.png",
+        url: "https://raw.githubusercontent.com/klmhyeonwoo/Asset-Archieve./main/nklcb.png",
         width: 1200,
         height: 630,
         alt: "네카라쿠배 채용 이미지",
