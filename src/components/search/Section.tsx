@@ -9,7 +9,12 @@ type SectionType = {
 function SearchSection({ data }: SectionType) {
   return (
     <div className={styles.input__section}>
-      <Select data={data} placeholder="해당 공고에서 제공하는 필터예요" />
+      <Select
+        data={data}
+        placeholder={`해당 공고에서 제공하는 필터예요 (${
+          Array.from(data).length
+        })`}
+      />
     </div>
   );
 }

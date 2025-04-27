@@ -64,14 +64,8 @@
     margin-left: auto;
   }
 
-  &[data-selected="true"] {
-    background-color: var(--primaryOpacity100);
-    border: solid 0.1rem var(--primary500);
-    color: var(--primary500);
-
-    img:nth-of-type(2) {
-      transform: rotate(180deg);
-    }
+  & span[data-selected="true"] {
+    color: var(--grey800);
   }
 }
 

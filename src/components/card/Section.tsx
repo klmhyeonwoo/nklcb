@@ -25,20 +25,27 @@ export default function CardSection({ data }: { data: RecruitData[] }) {
     return item.subJobCdNm === selectedGlobalFilter;
   });
   return (
-    <section className={styles.card__section}>
-      {filteredData.map((item) => (
-        <Card key={item.id}>
-          <Card.CardContent
-            title={item.annoSubject}
-            company={item.sysCompanyCdNm}
-            position={item.subJobCdNm}
-            employType={item.empTypeCdNm}
-            fromDate={item.startDate}
-            toDate={item.endDate}
-            link={item.jobDetailLink}
-          />
-        </Card>
-      ))}
+    <section
+      className={styles.card__section}
+      data-collection={!!filteredData.length}
+    >
+      {filteredData.length ? (
+        filteredData.map((item) => (
+          <Card key={item.id}>
+            <Card.CardContent
+              title={item.annoSubject}
+              company={item.sysCompanyCdNm}
+              position={item.subJobCdNm}
+              employType={item.empTypeCdNm}
+              fromDate={item.startDate}
+              toDate={item.endDate}
+              link={item.jobDetailLink}
+            />
+          </Card>
+        ))
+      ) : (
+        <span> 웁스, 해당 기업의 공고가 존재하지 않아요</span>
+      )}
     </section>
   );
 }

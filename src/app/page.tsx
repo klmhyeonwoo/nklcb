@@ -6,9 +6,14 @@ import CardSection from "@/components/card/Section";
 import TabSection from "@/components/tab/Section";
 import "@/styles/style.scss";
 import SearchSection from "@/components/search/Section";
+import { Metadata } from "next";
 
 type paramsType = {
   searchParams: Promise<{ company?: string }>;
+};
+
+type GenerateMetadataProps = {
+  searchParams: { company?: string };
 };
 
 async function getRecruitData({ query = "naver" }: { query: string }) {
@@ -27,6 +32,25 @@ async function getRecruitData({ query = "naver" }: { query: string }) {
   } catch (error) {
     return { data: [], error };
   }
+}
+
+export async function generateMetadata({
+  searchParams,
+}: GenerateMetadataProps): Promise<Metadata> {
+  const company = searchParams.company || "네이버";
+  const companyName =
+    SERVICE_CATEGORY[company as keyof typeof SERVICE_CATEGORY]?.name ||
+    "네이버";
+
+  return {
+    title: `네카라쿠배 채용 | ${companyName} 채용 정보`,
+    description: `${companyName}의 최신 채용 정보를 확인해보세요`,
+    openGraph: {
+      title: `${companyName} 채용 정보`,
+      description: `${companyName}의 최신 채용 정보를 한눈에 확인하세요`,
+      type: "website",
+    },
+  };
 }
 
 export default async function Home({ searchParams }: paramsType) {

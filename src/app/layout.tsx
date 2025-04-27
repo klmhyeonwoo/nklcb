@@ -20,6 +20,11 @@ export const metadata: Metadata = {
   icons: {
     icon: "/images/favicon.svg",
   },
+  openGraph: {
+    title: "네카라쿠배 채용",
+    description: "내가 원했던 기업을 한 눈에 확인해보세요",
+    type: "website",
+  },
 };
 
 export default function RootLayout({
