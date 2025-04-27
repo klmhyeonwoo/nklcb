@@ -5,6 +5,8 @@ import { api } from "@/api";
 import CardSection from "@/components/card/Section";
 import TabSection from "@/components/tab/Section";
 import "@/styles/style.scss";
+import SearchSection from "@/components/search/Section";
+import { Metadata } from "next";
 
 type paramsType = {
   searchParams: Promise<{ company?: string }>;
@@ -17,15 +19,39 @@ async function getRecruitData({ query = "naver" }: { query: string }) {
         SERVICE_CATEGORY[query as keyof typeof SERVICE_CATEGORY].code
       }`
     );
-    return { data: response.data };
+
+    const category: Set<string> = new Set(
+      response.data.map((item: { subJobCdNm: string }) => item.subJobCdNm)
+    );
+
+    return { data: response.data, category };
   } catch (error) {
     return { data: [], error };
   }
 }
 
+export async function generateMetadata({
+  searchParams,
+}: paramsType): Promise<Metadata> {
+  const { company } = await searchParams;
+  const companyName =
+    SERVICE_CATEGORY[company as keyof typeof SERVICE_CATEGORY]?.name ||
+    "네이버";
+
+  return {
+    title: `네카라쿠배 채용 | ${companyName} 채용 정보`,
+    description: `${companyName}의 최신 채용 정보를 확인해보세요`,
+    openGraph: {
+      title: `${companyName} 채용 정보`,
+      description: `${companyName}의 최신 채용 정보를 한눈에 확인하세요`,
+      type: "website",
+    },
+  };
+}
+
 export default async function Home({ searchParams }: paramsType) {
   const { company } = await searchParams;
-  const { data } = await getRecruitData({
+  const { data, category } = await getRecruitData({
     query: (company as keyof typeof SERVICE_CATEGORY) || "naver",
   });
 
@@ -47,6 +73,7 @@ export default async function Home({ searchParams }: paramsType) {
               0
             )}
           />
+          <SearchSection data={category || new Set<string>()} />
           <CardSection data={data} />
         </div>
       </article>

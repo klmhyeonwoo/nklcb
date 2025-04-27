@@ -11,8 +11,9 @@
     flex-direction: column;
     justify-content: center;
     align-items: center;
-    row-gap: 5rem;
+    row-gap: 3rem;
     padding: 6rem 3rem 3rem 3rem;
+    max-width: 110rem;
 
     .text-wrapper {
       display: flex;
