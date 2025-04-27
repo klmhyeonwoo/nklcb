@@ -45,6 +45,14 @@ export async function generateMetadata({
       title: `${companyName} 채용 정보`,
       description: `${companyName}의 최신 채용 정보를 한눈에 확인하세요`,
       type: "website",
+      images: [
+        {
+          url: "https://raw.githubusercontent.com/klmhyeonwoo/Asset-Archieve./main/nklcb.png",
+          width: 1200,
+          height: 630,
+          alt: "네카라쿠배 채용 이미지",
+        },
+      ],
     },
   };
 }
