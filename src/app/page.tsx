@@ -35,15 +35,22 @@ export async function generateMetadata({
 }: paramsType): Promise<Metadata> {
   const { company } = await searchParams;
   const companyName =
-    SERVICE_CATEGORY[company as keyof typeof SERVICE_CATEGORY]?.name ||
-    "네이버";
+    SERVICE_CATEGORY[company as keyof typeof SERVICE_CATEGORY]?.name;
 
   return {
-    title: `네카라쿠배 채용 | ${companyName} 채용 정보`,
-    description: `${companyName}의 최신 채용 정보를 확인해보세요`,
+    title: companyName
+      ? `네카라쿠배 채용 | ${companyName} 채용 정보`
+      : "네카라쿠배 채용",
+    description: companyName
+      ? `${companyName}의 최신 채용 정보를 확인해보세요`
+      : "내가 원했던 기업을 한 눈에 확인해보세요",
     openGraph: {
-      title: `${companyName} 채용 정보`,
-      description: `${companyName}의 최신 채용 정보를 한눈에 확인하세요`,
+      title: companyName
+        ? `네카라쿠배 채용 | ${companyName} 채용 정보`
+        : "네카라쿠배 채용",
+      description: companyName
+        ? `${companyName}의 최신 채용 정보를 확인해보세요`
+        : "내가 원했던 기업을 한 눈에 확인해보세요",
       type: "website",
       images: [
         {
