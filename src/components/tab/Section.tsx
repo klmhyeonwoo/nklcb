@@ -2,35 +2,58 @@
 import styles from "@/styles/components/tab.module.scss";
 import Tab from "./Tab";
 import useTab from "@/hooks/useTab";
-import { SERVICE_CATEGORY } from "@/utils/const";
-import { useRouter } from "next/navigation";
+import { useRouter, useSearchParams } from "next/navigation";
 import { useMemo } from "react";
+import { useSetAtom } from "jotai";
+import { SELECTED_COMPANY_STORE } from "../store";
+
+type companiesType = {
+  companyCode: string;
+  name: string;
+};
 
 type TabData = {
-  data: string[];
-  currentIndex: number;
+  data: companiesType[];
+  currentIndex?: number;
+};
+
+const setCurrentIndex = (index: number) => {
+  return Math.max(index, 0);
+};
+
+const getCompanyCodeArray = (data: companiesType[]) => {
+  return data.map((company) => company?.companyCode) ?? [];
 };
 
 function TabSection({ data, currentIndex }: TabData) {
   const router = useRouter();
+  const searchParams = useSearchParams();
+  const setGlobalCompanyInfo = useSetAtom(SELECTED_COMPANY_STORE);
+  const company = searchParams.get("company") || "NAVER";
+
   const { currentTab, setTab } = useTab({
-    initialTab: currentIndex,
+    initialTab: setCurrentIndex(
+      currentIndex ?? getCompanyCodeArray(data).indexOf(company)
+    ),
     totalTabs: data.length,
   });
 
-  const handleClickTab = (index: number) => {
+  const handleClickTab = async (index: number) => {
+    if (index === currentTab) return;
     setTab(index);
-    router.replace(`/?company=${data[index]}`);
+    setGlobalCompanyInfo(data[index]);
+    const params = new URLSearchParams(searchParams.toString());
+    params.set("company", data[index].companyCode);
+    router.push(`/?${params.toString()}`);
   };
 
   const tabs = useMemo(
     () =>
-      data.map((key) => {
-        const categoryName = key as keyof typeof SERVICE_CATEGORY;
+      data.map((item, index) => {
         return {
-          name: SERVICE_CATEGORY[categoryName].name,
-          code: SERVICE_CATEGORY[categoryName].code,
-          index: data.indexOf(key),
+          name: item.name,
+          code: item.companyCode,
+          id: index,
         };
       }),
     [data]
@@ -38,14 +61,14 @@ function TabSection({ data, currentIndex }: TabData) {
 
   return (
     <div className={styles.tab__container}>
-      {tabs.map(({ name, code, index }) => (
+      {tabs.map(({ name, code, id }) => (
         <Tab
           key={code}
           label={name}
           value={code}
-          index={index}
+          index={id}
           active={currentTab}
-          onClick={() => handleClickTab(index)}
+          onClick={() => handleClickTab(id)}
         />
       ))}
     </div>

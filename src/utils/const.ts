@@ -5,7 +5,7 @@ const SERVICE_CATEGORY: {
     | "kakao"
     | "line"
     | "coupang"
-    | "woowa"
+    | "woowahan"
     | "daangn"
     | "toss"
     | "yanolja"]: {
@@ -29,9 +29,9 @@ const SERVICE_CATEGORY: {
     code: "COUPANG",
     name: "쿠팡",
   },
-  woowa: {
-    code: "BAEMIN",
-    name: "우아한형제들",
+  woowahan: {
+    code: "WOOWAHAN",
+    name: "배달의민족",
   },
   daangn: {
     code: "DAANGN",
