@@ -10,6 +10,7 @@ import "@/styles/error.scss";
 import Image from "next/image";
 import TabSection from "@/components/tab/Section";
 import { api } from "@/api";
+import { Suspense } from "react";
 
 export const metadata: Metadata = {
   title: "네카라쿠배 채용",
@@ -62,7 +63,9 @@ export default async function RootLayout({
                 alt="네카라쿠배 공고 서비스 공식 로고"
                 layout="responsive"
               />
-              <TabSection data={companies} />
+              <Suspense>
+                <TabSection data={companies} />
+              </Suspense>
               {children}
             </div>
           </article>
