@@ -1,11 +1,15 @@
 import type { Metadata } from "next";
 import { Analytics } from "@vercel/analytics/react";
 import { GoogleAnalytics } from "@next/third-parties/google";
+import logo from "../../public/images/logo.svg";
 
 import "@/styles/global.scss";
 import "@/styles/components.scss";
 import "@/styles/schema.scss";
 import "@/styles/error.scss";
+import Image from "next/image";
+import TabSection from "@/components/tab/Section";
+import { api } from "@/api";
 
 export const metadata: Metadata = {
   title: "네카라쿠배 채용",
@@ -27,17 +31,43 @@ export const metadata: Metadata = {
   },
 };
 
-export default function RootLayout({
+async function getCompanyList() {
+  try {
+    const { data } = await api.get("/companies");
+    return data;
+  } catch (error) {
+    console.error("Error fetching data:", error);
+    return [];
+  }
+}
+
+export default async function RootLayout({
   children,
 }: Readonly<{
   children: React.ReactNode;
 }>) {
+  const { companies } = await getCompanyList();
+
   return (
     <html lang="en">
       <Analytics />
       <GoogleAnalytics gaId="G-6M2JP9HLCY" />
       <head />
-      <body>{children}</body>
+      <body>
+        <section>
+          <article className="content-wrapper">
+            <div>
+              <Image
+                src={logo}
+                alt="네카라쿠배 공고 서비스 공식 로고"
+                layout="responsive"
+              />
+              <TabSection data={companies} />
+              {children}
+            </div>
+          </article>
+        </section>
+      </body>
     </html>
   );
 }

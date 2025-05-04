@@ -24,6 +24,7 @@
 .tab__container {
   display: flex;
   flex-direction: row;
+  justify-content: center;
   flex-wrap: wrap;
   overflow-x: auto;
   overflow-y: hidden;

@@ -1,5 +1,4 @@
 "use client";
-
 import styles from "@/styles/components/card.module.scss";
 import icon_arrow from "../../../public/icon/arrow_white.svg";
 import icon_calendar from "../../../public/icon/calendar.svg";
@@ -8,32 +7,50 @@ import icon_cube from "../../../public/icon/cube.svg";
 import icon_cube_light from "../../../public/icon/cube_light.svg";
 
 import Image from "next/image";
+import { api } from "@/api";
+import { formatDate, scaledPositionName } from "@/utils/common";
 
 type cardType = {
+  id: number;
   title: string;
   company: string;
   position: string;
-  employType: string;
   fromDate: string;
   toDate: string;
-  link: string;
+  link?: string;
 };
+
+async function pathToRecruitmentNotice({ id }: { id: number }) {
+  const { data } = await api.get(`/recruitment-notices/${id}/redirect`);
+  return data;
+}
 
 function CardContainer({ children }: { children: React.ReactNode }) {
   return <div className={styles.card__wrapper}>{children}</div>;
 }
 
 function CardContent({
+  id,
   title,
   company,
   position,
   fromDate,
   toDate,
-  employType,
   link,
 }: cardType) {
-  const handleCardClick = () => {
-    window.open(link, "_blank");
+  const handleCardClick = (id: number) => {
+    if (link) {
+      window.open(link, "_blank");
+    }
+    if (id) {
+      pathToRecruitmentNotice({ id })
+        .then((res) => {
+          console.log(res);
+        })
+        .catch((error) => {
+          console.error("Error fetching data:", error);
+        });
+    }
   };
   return (
     <div className={styles.card__container}>
@@ -72,16 +89,19 @@ function CardContent({
         />
         <span className={styles.card__timestamp}>
           {fromDate && toDate
-            ? `${fromDate} ~ ${
-                toDate.includes("2999") ? "채용 시 마감" : toDate
-              }`
+            ? `${formatDate(fromDate)} ~ ${formatDate(toDate)}`
             : "해당 공고는 상시 채용이에요."}
         </span>
       </div>
       <span className={styles.card__position}>
-        {position} 포지션의 {employType}직으로 뽑고 있어요.
+        {position
+          ? `${scaledPositionName(position)} 포지션으로 채용하고있어요.`
+          : `해당 공고는 포지션이 명시되어 있지 않아요.`}
       </span>
-      <div className={styles.card__path__container} onClick={handleCardClick}>
+      <div
+        className={styles.card__path__container}
+        onClick={() => handleCardClick(id)}
+      >
         <Image
           width={12}
           height={12}
