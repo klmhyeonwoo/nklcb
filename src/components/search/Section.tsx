@@ -23,12 +23,10 @@ function SearchSection({ data }: SectionType) {
         value={value}
         onChange={handleChange}
       />
-      {data.length > 0 && (
-        <Select
-          data={data}
-          placeholder={`해당 기업이 제공하는 카테고리 (${data.length})`}
-        />
-      )}
+      <Select
+        data={data}
+        placeholder={`해당 기업이 제공하는 카테고리 (${data.length})`}
+      />
     </div>
   );
 }

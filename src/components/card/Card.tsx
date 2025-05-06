@@ -7,7 +7,6 @@ import icon_cube from "../../../public/icon/cube.svg";
 import icon_cube_light from "../../../public/icon/cube_light.svg";
 
 import Image from "next/image";
-import { api } from "@/api";
 import { formatDate, scaledPositionName } from "@/utils/common";
 
 type cardType = {
@@ -19,11 +18,6 @@ type cardType = {
   toDate: string;
   link?: string;
 };
-
-async function pathToRecruitmentNotice({ id }: { id: number }) {
-  const { data } = await api.get(`/recruitment-notices/${id}/redirect`);
-  return data;
-}
 
 function CardContainer({ children }: { children: React.ReactNode }) {
   return <div className={styles.card__wrapper}>{children}</div>;

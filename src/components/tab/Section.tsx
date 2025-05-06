@@ -4,8 +4,6 @@ import Tab from "./Tab";
 import useTab from "@/hooks/useTab";
 import { usePathname, useRouter, useSearchParams } from "next/navigation";
 import { useMemo } from "react";
-import { useSetAtom } from "jotai";
-import { SELECTED_COMPANY_STORE } from "../store";
 
 type companiesType = {
   companyCode: string;

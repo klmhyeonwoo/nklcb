@@ -1,7 +1,6 @@
 import { api } from "@/api";
 import { redirect } from "next/navigation";
 import { Metadata } from "next";
-import Loading from "./loading";
 
 type RecruitmentMetaType = {
   title: string;
@@ -68,10 +67,11 @@ async function getRecruitmentInfo({
 export async function generateMetadata({
   searchParams,
 }: {
-  searchParams: { id: number };
+  searchParams: Promise<{ id: number }>;
 }): Promise<Metadata> {
+  const { id } = await searchParams;
   const { data, url } = await getRecruitmentInfo({
-    id: searchParams.id,
+    id,
   });
 
   if (!data || !url) {
@@ -95,9 +95,14 @@ export async function generateMetadata({
   };
 }
 
-async function Page({ searchParams }: { searchParams: { id: number } }) {
+async function Page({
+  searchParams,
+}: {
+  searchParams: Promise<{ id: number }>;
+}) {
+  const { id } = await searchParams;
   const { data, url } = await getRecruitmentInfo({
-    id: searchParams.id,
+    id,
   });
 
   if (!data || !url) {
