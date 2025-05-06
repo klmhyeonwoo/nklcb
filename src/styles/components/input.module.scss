@@ -64,6 +64,10 @@
   transition: 0.4s all;
   box-sizing: border-box;
 
+  @media (max-width: 768px) {
+    max-height: 5rem;
+  }
+
   &:hover {
     border-color: var(--grey600);
   }
