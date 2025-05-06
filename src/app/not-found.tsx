@@ -6,7 +6,7 @@ import React from "react";
 
 function NotFound() {
   const handleNavigate = () => {
-    window.history.back();
+    window.location.href = "/";
   };
 
   return (

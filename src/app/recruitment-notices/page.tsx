@@ -54,6 +54,7 @@ async function getRecruitmentInfo({
   try {
     const response = await api.get(`/recruitment-notices/${id}/redirect`);
     const redirectUrl = response?.request?.res?.responseUrl;
+
     return {
       data: response.data,
       url: redirectUrl || "",
