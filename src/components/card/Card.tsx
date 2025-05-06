@@ -43,13 +43,7 @@ function CardContent({
       window.open(link, "_blank");
     }
     if (id) {
-      pathToRecruitmentNotice({ id })
-        .then((res) => {
-          console.log(res);
-        })
-        .catch((error) => {
-          console.error("Error fetching data:", error);
-        });
+      window.open(`/recruitment-notices?id=${id}`, "_blank");
     }
   };
   return (

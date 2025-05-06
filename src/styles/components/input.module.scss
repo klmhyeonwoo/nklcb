@@ -96,8 +96,17 @@
 .select__box {
   cursor: pointer;
 
-  & span[data-selected="true"] {
+  &[data-selected="true"] > span {
     color: var(--grey800);
+  }
+
+  &[data-selected="true"] {
+    border-color: var(--grey600);
+  }
+
+  &[data-is-open-data-list="true"] {
+    pointer-events: none;
+    cursor: default;
   }
 }
 

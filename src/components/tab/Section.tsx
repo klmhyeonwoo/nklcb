@@ -2,7 +2,7 @@
 import styles from "@/styles/components/tab.module.scss";
 import Tab from "./Tab";
 import useTab from "@/hooks/useTab";
-import { useRouter, useSearchParams } from "next/navigation";
+import { usePathname, useRouter, useSearchParams } from "next/navigation";
 import { useMemo } from "react";
 import { useSetAtom } from "jotai";
 import { SELECTED_COMPANY_STORE } from "../store";
@@ -27,8 +27,8 @@ const getCompanyCodeArray = (data: companiesType[]) => {
 
 function TabSection({ data, currentIndex }: TabData) {
   const router = useRouter();
+  const pathname = usePathname();
   const searchParams = useSearchParams();
-  const setGlobalCompanyInfo = useSetAtom(SELECTED_COMPANY_STORE);
   const company = searchParams.get("company") || "NAVER";
 
   const { currentTab, setTab } = useTab({
@@ -41,10 +41,9 @@ function TabSection({ data, currentIndex }: TabData) {
   const handleClickTab = async (index: number) => {
     if (index === currentTab) return;
     setTab(index);
-    setGlobalCompanyInfo(data[index]);
     const params = new URLSearchParams(searchParams.toString());
     params.set("company", data[index].companyCode);
-    router.push(`/?${params.toString()}`);
+    router.push(`${pathname}/?${params.toString()}`);
   };
 
   const tabs = useMemo(

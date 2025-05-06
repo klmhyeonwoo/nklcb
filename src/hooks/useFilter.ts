@@ -1,6 +1,6 @@
 import { CATEGORY_STORE } from "@/components/store";
 import { useAtom } from "jotai";
-import { useRouter } from "next/navigation";
+import { usePathname, useRouter } from "next/navigation";
 import { useState } from "react";
 
 export function useFilter() {
@@ -9,12 +9,13 @@ export function useFilter() {
     string | null
   >(CATEGORY_STORE);
   const router = useRouter();
+  const pathname = usePathname();
 
   const removeSelectedFilter = () => {
     setSelectedGlobalFilter(null);
     const params = new URLSearchParams(window.location.search);
     params.delete("category");
-    router.push(`/?${params.toString()}`);
+    router.push(`${pathname}/?${params.toString()}`);
   };
 
   return {

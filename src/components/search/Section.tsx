@@ -4,7 +4,7 @@ import Select from "./Select";
 import Input from "./Input";
 import { ChangeEvent } from "react";
 import { useAtom } from "jotai";
-import { SEARCH_KEYWORD_STORE, SELECTED_COMPANY_STORE } from "../store";
+import { SEARCH_KEYWORD_STORE } from "../store";
 
 type SectionType = {
   data: string[];
@@ -12,7 +12,6 @@ type SectionType = {
 
 function SearchSection({ data }: SectionType) {
   const [value, setValue] = useAtom(SEARCH_KEYWORD_STORE);
-  const [globalSelectedCompanyInfo] = useAtom(SELECTED_COMPANY_STORE);
   const handleChange = (e: ChangeEvent<HTMLInputElement>) => {
     setValue(e.target.value);
   };
@@ -26,7 +25,7 @@ function SearchSection({ data }: SectionType) {
       />
       <Select
         data={data}
-        placeholder={`${globalSelectedCompanyInfo.name}에서 제공하는 카테고리예요 (${data.length})`}
+        placeholder={`해당 기업이 제공하는 카테고리 (${data.length})`}
       />
     </div>
   );

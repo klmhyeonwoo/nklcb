@@ -8,7 +8,7 @@ import { scaledPositionName } from "@/utils/common";
 import styles from "@/styles/components/input.module.scss";
 import { useFilter } from "@/hooks/useFilter";
 import useClickOutside from "@/hooks/useClickOutside";
-import { useRouter, useSearchParams } from "next/navigation";
+import { usePathname, useRouter, useSearchParams } from "next/navigation";
 
 type SelectType = {
   data: string[];
@@ -18,6 +18,7 @@ type SelectType = {
 function Select({ data, placeholder, ...props }: SelectType) {
   const selectRef = useRef<HTMLDivElement>(null);
   const searchParams = useSearchParams();
+  const pathname = usePathname();
   const router = useRouter();
   const category = searchParams.get("category");
 
@@ -43,17 +44,23 @@ function Select({ data, placeholder, ...props }: SelectType) {
     setSelectedGlobalFilter(item);
     const params = new URLSearchParams(searchParams.toString());
     params.set("category", item);
-    router.push(`/?${params.toString()}`);
+    router.push(`${pathname}/?${params.toString()}`);
   };
 
   return (
     <Fragment>
-      <div className={styles.select__box} onClick={handleOpenSelect} {...props}>
+      <div
+        className={styles.select__box}
+        onClick={handleOpenSelect}
+        data-selected={category ? true : false}
+        data-is-open-data-list={isOpenFilter}
+        {...props}
+      >
         <Image src={icon_airplane} alt={placeholder} width={16} height={16} />
         {category ? (
-          <span data-selected={true}>{scaledPositionName(category)}</span>
+          <span>{scaledPositionName(category)}</span>
         ) : (
-          <span data-selected={false}>{placeholder}</span>
+          <span>{placeholder}</span>
         )}
         {category ? (
           <Image

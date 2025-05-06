@@ -26,10 +26,17 @@ export default function CardSection({ data }: { data: RecruitData[] }) {
       if (keyword === null) return true;
       return (
         item.jobOfferTitle?.toLowerCase().includes(keyword) ||
-        item.categories?.some((category) =>
-          category?.toLowerCase().includes(keyword)
-        ) ||
-        scaledPositionName(item.categories[0]?.trim())?.includes(keyword)
+        item.jobOfferTitle.includes(keyword) ||
+        item.categories?.some((category) => {
+          const originalCategory = category?.toLowerCase().trim();
+          const scaledCategory = scaledPositionName(
+            category?.trim()
+          )?.toLowerCase();
+          return (
+            originalCategory?.includes(keyword) ||
+            scaledCategory?.includes(keyword)
+          );
+        })
       );
     }) ?? [];
   return (
