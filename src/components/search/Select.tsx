@@ -1,5 +1,5 @@
 "use client";
-import React, { Fragment, useEffect, useRef } from "react";
+import React, { Fragment, useRef } from "react";
 import icon_arrow from "../../../public/icon/arrow_gray.svg";
 import icon_airplane from "../../../public/icon/airplane.svg";
 import icon_quit from "../../../public/icon/quit.svg";
@@ -46,15 +46,6 @@ function Select({ data, placeholder, ...props }: SelectType) {
     params.set("category", item);
     router.replace(`${pathname}/?${params.toString()}`);
   };
-
-  // TODO: 쿠팡의 경우 제공하는 카테고리가 없어 현재로써는 카테고리가 올 경우, 파라미터에서 제거
-  useEffect(() => {
-    if (data.length === 0) {
-      const params = new URLSearchParams(searchParams.toString());
-      params.delete("category");
-      router.replace(`${pathname}/?${params.toString()}`);
-    }
-  }, []);
 
   // data가 없을 경우에는 노출시키지 않음
   if (data.length === 0) {

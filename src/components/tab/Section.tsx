@@ -41,6 +41,9 @@ function TabSection({ data, currentIndex }: TabData) {
     setTab(index);
     const params = new URLSearchParams(searchParams.toString());
     params.set("company", data[index].companyCode);
+    if (params.has("category")) {
+      params.delete("category");
+    }
     router.replace(`${pathname}/?${params.toString()}`);
   };
 
