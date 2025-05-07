@@ -8,7 +8,7 @@ async function getRecruitmentInfo({
 }): Promise<{ status: number }> {
   try {
     const { status } = await api.post(`/recruitment-notices/${id}/click`);
-    await new Promise((resolve) => setTimeout(resolve, 2000));
+    // await new Promise((resolve) => setTimeout(resolve, 2000));
     return {
       status,
     };
