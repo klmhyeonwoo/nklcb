@@ -36,6 +36,11 @@ export default async function RootLayout({
     <html lang="ko">
       <Analytics />
       <GoogleAnalytics gaId="G-6M2JP9HLCY" />
+      <script
+        async
+        src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-1550225145364569"
+        crossOrigin="anonymous"
+      ></script>
       <head>
         <meta
           name="viewport"
