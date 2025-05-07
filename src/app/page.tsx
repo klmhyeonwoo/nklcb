@@ -1,175 +1,59 @@
-import Image from "next/image";
-import logo from "../../public/images/logo.svg";
-import { SERVICE_CATEGORY } from "@/utils/const";
-import { api } from "@/api";
-import CardSection from "@/components/card/Section";
-import TabSection from "@/components/tab/Section";
-import "@/styles/style.scss";
-import SearchSection from "@/components/search/Section";
-import { Metadata } from "next";
-import { Fragment, Suspense } from "react";
-import EyesLoading from "@/components/loading/EyesLoading";
-
-type paramsType = {
-  searchParams: Promise<{ company?: string }>;
-};
-
-export async function generateMetadata({
-  searchParams,
-}: paramsType): Promise<Metadata> {
-  const { company } = await searchParams;
-  const companyName =
-    SERVICE_CATEGORY[company as keyof typeof SERVICE_CATEGORY]?.name;
-
-  return {
-    title: companyName
-      ? `네카라쿠배 채용 | ${companyName} 채용 정보`
-      : "네카라쿠배 채용",
-    description: companyName
-      ? `${companyName}의 최신 채용 정보를 확인해보세요`
-      : "내가 원했던 기업을 한 눈에 확인해보세요",
-    keywords: [
-      "네카라쿠배 채용",
-      "nklcb",
-      "nklcb.io",
-      "네이버 채용",
-      "카카오 채용",
-      "라인 채용",
-      "쿠팡 채용",
-      "우아한형제들 채용",
-      "당근 채용",
-      "토스 채용",
-      "프론트엔드 채용",
-      "백엔드 채용",
-      "풀스택 개발자 채용",
-      "모바일 개발자 채용",
-      "UI/UX 디자이너 채용",
-      "그래픽 디자이너 채용",
-      "데이터 분석가 채용",
-      "AI 엔지니어 채용",
-      "머신러닝 엔지니어 채용",
-      "서비스 기획 채용",
-      "프로덕트 매니저 채용",
-      "프로젝트 매니저 채용",
-      "신입 공개 채용",
-      "경력직 공개 채용",
-      "네카라쿠배 수시 채용",
-      "IT 기업 수시 채용",
-      "네카라쿠배 인턴 채용",
-      "IT 기업 인턴십",
-      "원격 근무 채용",
-      "재택 근무 가능 채용",
-      "2025 개발자 채용",
-      "IT 채용 트렌드",
-      "네카라쿠배 채용 공고",
-      "네카라쿠배 공고",
-      "블록체인 개발자 채용",
-      "AI 스타트업 채용",
-      "IT 대기업 채용",
-      "네카라쿠배 채용 정보",
-      "네카라쿠배 채용 공고",
-      "네카라쿠배 채용 사이트",
-      "네카라쿠배 채용 플랫폼",
-      "네카라쿠배 채용 리스트",
-      "네카라쿠배 채용 공고 리스트",
-      "네카라쿠배 채용 정보 리스트",
-      "네카라쿠배 채용 공고 정보",
-      "네카라쿠배 채용 공고 검색",
-      "네카라쿠배 채용 공고 필터링",
-      "네카라쿠배 채용 공고 정렬",
-      "네카라쿠배 채용 공고 알림",
-      "네카라쿠배 채용 공고 북마크",
-      "네카라쿠배 채용 공고 즐겨찾기",
-      "네카라쿠배 채용 공고 추천",
-      "네카라쿠배 채용 공고 공유",
-      "IT 기업 채용",
-      "개발자 채용",
-      "프론트엔드 개발자",
-      "백엔드 개발자",
-      "소프트웨어 엔지니어",
-      "IT 채용정보",
-      companyName ? `${companyName} 채용` : "",
-    ].filter(Boolean),
-    alternates: {
-      canonical: `https://nklcb.kr${company ? `/?company=${company}` : ""}`,
-    },
-    openGraph: {
-      title: companyName
-        ? `네카라쿠배 채용 | ${companyName} 채용 정보`
-        : "네카라쿠배 채용",
-      description: companyName
-        ? `${companyName}의 최신 채용 정보를 확인해보세요`
-        : "내가 원했던 기업을 한 눈에 확인해보세요",
-      type: "website",
-      images: [
-        {
-          url: "https://raw.githubusercontent.com/klmhyeonwoo/Asset-Archieve./main/nklcb.png",
-          width: 1200,
-          height: 630,
-          alt: "네카라쿠배 채용 이미지",
-        },
-      ],
-    },
-  };
-}
-
-async function getRecruitData({ query = "naver" }: { query: string }) {
-  try {
-    const response = await api.get(
-      `list?company=${
-        SERVICE_CATEGORY[query as keyof typeof SERVICE_CATEGORY].code
-      }`
-    );
-
-    const category: Set<string> = new Set(
-      response.data.map((item: { subJobCdNm: string }) => item.subJobCdNm)
-    );
-
-    return { data: response.data, category };
-  } catch (error) {
-    return { data: [], error };
-  }
-}
-
-async function RecruitDataSection({ company }: { company?: string }) {
-  const { data, category } = await getRecruitData({
-    query: (company as keyof typeof SERVICE_CATEGORY) || "naver",
-  });
-
+export default async function Home() {
   return (
-    <Fragment>
-      <SearchSection data={category || new Set<string>()} />
-      <CardSection data={data} />
-    </Fragment>
-  );
-}
+    <main>
+      <section className="hero">
+        <h1>네카라쿠배 채용의 모든 것</h1>
+        <p>국내 대표 IT 기업의 채용정보를 한눈에 확인하세요</p>
+      </section>
 
-export default async function Home({ searchParams }: paramsType) {
-  const { company } = await searchParams;
-
-  return (
-    <section>
-      <article className="content-wrapper">
-        <div>
-          <Image
-            src={logo}
-            alt="네카라쿠배 공고 서비스 공식 로고"
-            layout="responsive"
-          />
-          <TabSection
-            data={Object.keys(SERVICE_CATEGORY)}
-            currentIndex={Math.max(
-              Object.keys(SERVICE_CATEGORY).indexOf(
-                company as keyof typeof SERVICE_CATEGORY
-              ),
-              0
-            )}
-          />
-          <Suspense key={company} fallback={<EyesLoading />}>
-            <RecruitDataSection company={company} />
-          </Suspense>
+      <section className="highlights">
+        <div className="highlight-item">
+          <h2>실시간 채용 현황</h2>
+          <p>매일 업데이트되는 최신 채용 정보</p>
         </div>
-      </article>
-    </section>
+        <div className="highlight-item">
+          <h2>다양한 직무</h2>
+          <p>개발, 기획, 디자인 등 IT 전분야 포지션</p>
+        </div>
+        <div className="highlight-item">
+          <h2>경력 맞춤 정보</h2>
+          <p>신입부터 경력직까지 모든 레벨의 채용 정보</p>
+        </div>
+      </section>
+
+      <section className="companies">
+        <h2>주요 채용 기업</h2>
+        <ul>
+          <li>네이버 - 대한민국 대표 IT 플랫폼</li>
+          <li>카카오 - 모바일 라이프 플랫폼</li>
+          <li>라인 - 글로벌 메신저 서비스</li>
+          <li>쿠팡 - 대한민국 대표 이커머스</li>
+          <li>배달의민족 - 종합 푸드테크 기업</li>
+        </ul>
+      </section>
+
+      <section className="positions">
+        <h2>인기 채용 포지션</h2>
+        <ul>
+          <li>프론트엔드 개발자</li>
+          <li>백엔드 개발자</li>
+          <li>DevOps 엔지니어</li>
+          <li>데이터 사이언티스트</li>
+          <li>UX/UI 디자이너</li>
+          <li>프로덕트 매니저</li>
+        </ul>
+      </section>
+
+      <section className="benefits">
+        <h2>기업 복지 하이라이트</h2>
+        <ul>
+          <li>자율 출퇴근 및 리모트 근무</li>
+          <li>최신 장비 지원</li>
+          <li>자기계발비 지원</li>
+          <li>건강검진 및 의료비 지원</li>
+          <li>동호회 및 문화활동 지원</li>
+        </ul>
+      </section>
+    </main>
   );
 }
