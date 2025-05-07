@@ -15,7 +15,7 @@ export function useFilter() {
     setSelectedGlobalFilter(null);
     const params = new URLSearchParams(window.location.search);
     params.delete("category");
-    router.push(`${pathname}/?${params.toString()}`);
+    router.replace(`${pathname}/?${params.toString()}`);
   };
 
   return {

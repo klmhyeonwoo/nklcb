@@ -44,7 +44,7 @@ function Select({ data, placeholder, ...props }: SelectType) {
     setSelectedGlobalFilter(item);
     const params = new URLSearchParams(searchParams.toString());
     params.set("category", item);
-    router.push(`${pathname}/?${params.toString()}`);
+    router.replace(`${pathname}/?${params.toString()}`);
   };
 
   // TODO: 쿠팡의 경우 제공하는 카테고리가 없어 현재로써는 카테고리가 올 경우, 파라미터에서 제거
@@ -52,7 +52,7 @@ function Select({ data, placeholder, ...props }: SelectType) {
     if (data.length === 0) {
       const params = new URLSearchParams(searchParams.toString());
       params.delete("category");
-      router.push(`${pathname}/?${params.toString()}`);
+      router.replace(`${pathname}/?${params.toString()}`);
     }
   }, []);
 

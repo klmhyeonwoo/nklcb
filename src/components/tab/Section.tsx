@@ -41,7 +41,7 @@ function TabSection({ data, currentIndex }: TabData) {
     setTab(index);
     const params = new URLSearchParams(searchParams.toString());
     params.set("company", data[index].companyCode);
-    router.push(`${pathname}/?${params.toString()}`);
+    router.replace(`${pathname}/?${params.toString()}`);
   };
 
   const tabs = useMemo(
