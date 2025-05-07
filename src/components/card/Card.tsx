@@ -16,7 +16,7 @@ type cardType = {
   position: string;
   fromDate: string;
   toDate: string;
-  link?: string;
+  link: string;
 };
 
 function CardContainer({ children }: { children: React.ReactNode }) {
@@ -32,12 +32,9 @@ function CardContent({
   toDate,
   link,
 }: cardType) {
-  const handleCardClick = (id: number) => {
-    if (link) {
-      window.open(link, "_blank");
-    }
+  const handleCardClick = ({ id, path }: { id: number; path: string }) => {
     if (id) {
-      window.open(`/recruitment-notices?id=${id}`, "_blank");
+      window.open(`/recruitment-notices?id=${id}&path=${btoa(path)}`, "_blank");
     }
   };
   return (
@@ -88,7 +85,7 @@ function CardContent({
       </span>
       <div
         className={styles.card__path__container}
-        onClick={() => handleCardClick(id)}
+        onClick={() => handleCardClick({ id: id, path: link })}
       >
         <Image
           width={12}

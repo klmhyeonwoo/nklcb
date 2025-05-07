@@ -17,6 +17,7 @@ type RecruitData = {
   endAt: string;
   startAt: string;
   jobOfferTitle: string;
+  url: string;
 };
 
 export default function CardSection({ data }: { data: RecruitData[] }) {
@@ -55,6 +56,7 @@ export default function CardSection({ data }: { data: RecruitData[] }) {
                 position={item.categories[0]?.trim()}
                 fromDate={item.startAt}
                 toDate={item.endAt}
+                link={item.url}
               />
             </Card>
           );
