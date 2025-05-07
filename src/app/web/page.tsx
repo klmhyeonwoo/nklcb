@@ -51,7 +51,15 @@ async function getRecruitData({
     const { data } = await api.get(`/recruitment-notices/redirections`, {
       params,
     });
-    return data;
+    const list = data.list || [];
+    const scaledData = {
+      ...data,
+      list: list.map((item: { url: string }) => ({
+        ...item,
+        url: btoa(item.url),
+      })),
+    };
+    return scaledData;
   } catch (error) {
     return { data: [], error };
   }

@@ -34,7 +34,7 @@ function CardContent({
 }: cardType) {
   const handleCardClick = ({ id, path }: { id: number; path: string }) => {
     if (id) {
-      window.open(`/recruitment-notices?id=${id}&path=${btoa(path)}`, "_blank");
+      window.open(`/recruitment-notices?id=${id}&path=${path}`, "_blank");
     }
   };
   return (
