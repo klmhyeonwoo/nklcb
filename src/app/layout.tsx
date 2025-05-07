@@ -21,8 +21,20 @@ export const metadata: Metadata = {
     icon: "/images/favicon.svg",
   },
   openGraph: {
-    title: "네카라쿠배 채용",
-    description: "내가 원했던 기업을 한 눈에 확인해보세요",
+    title: "네카라쿠배 채용 - IT 기업 채용정보 플랫폼",
+    description:
+      "네이버, 카카오, 라인, 쿠팡, 배달의민족 등 대한민국 대표 IT 기업의 채용 정보를 한눈에 확인하세요",
+    url: "https://nklcb.io",
+    siteName: "nklcb",
+    images: [
+      {
+        url: "/images/og-image.png",
+        width: 1200,
+        height: 630,
+        alt: "네카라쿠배 채용 플랫폼",
+      },
+    ],
+    locale: "ko_KR",
     type: "website",
   },
 };
