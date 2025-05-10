@@ -20,6 +20,11 @@ export const metadata: Metadata = {
   icons: {
     icon: "/images/favicon.svg",
   },
+  viewport: {
+    width: "device-width",
+    initialScale: 1,
+    maximumScale: 1,
+  },
   openGraph: {
     title: "네카라쿠배 채용 - IT 기업 채용정보 플랫폼",
     description:
@@ -53,12 +58,7 @@ export default async function RootLayout({
         src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-1550225145364569"
         crossOrigin="anonymous"
       ></script>
-      <head>
-        <meta
-          name="viewport"
-          content="width=device-width, initial-scale=1, maximum-scale=1"
-        />
-      </head>
+      <head />
       <body>{children}</body>
     </html>
   );
