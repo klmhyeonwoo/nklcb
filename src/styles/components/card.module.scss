@@ -54,9 +54,18 @@
 
     .card__title,
     .card__company,
+    .card__coporate,
     .card__position,
     .card__timestamp {
       color: #fff;
+    }
+
+    span[data-is-more-corporates="true"] {
+      display: none;
+    }
+
+    .card__coporate {
+      display: block;
     }
 
     .card__path__container {
@@ -90,10 +99,17 @@
   color: var(--grey700);
 }
 
-.card__company {
+.card__company,
+.card__coporate {
   font-size: 1.4rem;
   font-weight: 400;
   color: var(--greyOpacity500);
+}
+
+.card__coporate {
+  display: none;
+  word-break: keep-all;
+  line-height: 1.7;
 }
 
 .card__path__container {

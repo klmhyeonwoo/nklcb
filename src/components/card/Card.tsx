@@ -8,11 +8,16 @@ import icon_cube_light from "../../../public/icon/cube_light.svg";
 
 import Image from "next/image";
 import { formatDate, scaledPositionName } from "@/utils/common";
+import { useRef } from "react";
 
 type cardType = {
   id: number;
   title: string;
   company: string;
+  corporates: {
+    corporateName: string;
+    corporateCode: string;
+  }[];
   position: string;
   fromDate: string;
   toDate: string;
@@ -27,6 +32,7 @@ function CardContent({
   id,
   title,
   company,
+  corporates,
   position,
   fromDate,
   toDate,
@@ -37,9 +43,24 @@ function CardContent({
       window.open(`/recruitment-notices?id=${id}&path=${path}`, "_blank");
     }
   };
+  const scaledDetailCorpotateName = corporates.map((corporate) => {
+    return corporate.corporateName;
+  });
+  const isMoreCorporeates = useRef(corporates.length > 1);
+
   return (
     <div className={styles.card__container}>
-      <span className={styles.card__company}> {company} </span>
+      <span
+        className={styles.card__company}
+        data-is-more-corporates={isMoreCorporeates.current}
+      >
+        {company}
+      </span>
+      {isMoreCorporeates.current && (
+        <span className={styles.card__coporate}>
+          {`${scaledDetailCorpotateName.join(" · ")} 채용 중`}
+        </span>
+      )}
       <div className={styles.card__title__container}>
         <Image
           src={icon_cube}
