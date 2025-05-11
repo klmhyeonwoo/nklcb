@@ -11,11 +11,6 @@ export const baseMetaData = {
   icons: {
     icon: "/images/favicon.svg",
   },
-  viewport: {
-    width: "device-width",
-    initialScale: 1,
-    maximumScale: 1,
-  },
   openGraph: {
     title: "네카라쿠배 채용 - IT 기업 채용정보 플랫폼",
     description:

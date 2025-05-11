@@ -1,4 +1,4 @@
-import type { Metadata } from "next";
+import type { Metadata, Viewport } from "next";
 import { Analytics } from "@vercel/analytics/react";
 import { GoogleAnalytics } from "@next/third-parties/google";
 
@@ -9,6 +9,11 @@ import "@/styles/error.scss";
 import { baseMetaData } from "@/og";
 
 export const metadata: Metadata = baseMetaData;
+export const viewport: Viewport = {
+  width: "device-width",
+  initialScale: 1,
+  maximumScale: 1,
+};
 
 export default async function RootLayout({
   children,
