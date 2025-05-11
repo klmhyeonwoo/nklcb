@@ -14,6 +14,10 @@ type RecruitData = {
   clickCount: number;
   companyCode: string;
   companyName: string;
+  corporates: {
+    corporateName: string;
+    corporateCode: string;
+  }[];
   endAt: string;
   startAt: string;
   jobOfferTitle: string;
@@ -40,6 +44,18 @@ export default function CardSection({ data }: { data: RecruitData[] }) {
         })
       );
     }) ?? [];
+  const generateCompanyName = (item: RecruitData) => {
+    if (item.corporates.length > 0) {
+      if (item.corporates.length === 1) {
+        return item.corporates[0].corporateName;
+      } else {
+        return `${item.corporates[0].corporateName} 외 ${
+          item.corporates.length - 1
+        }개 계열사`;
+      }
+    }
+    return item.companyName;
+  };
   return (
     <section
       className={styles.card__section}
@@ -52,7 +68,8 @@ export default function CardSection({ data }: { data: RecruitData[] }) {
               <Card.CardContent
                 id={item.recruitmentNoticeId}
                 title={item.jobOfferTitle}
-                company={item.companyName}
+                company={generateCompanyName(item)}
+                corporates={item.corporates}
                 position={item.categories[0]?.trim()}
                 fromDate={item.startAt}
                 toDate={item.endAt}
