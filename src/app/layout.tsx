@@ -6,6 +6,7 @@ import "@/styles/global.scss";
 import "@/styles/components.scss";
 import "@/styles/schema.scss";
 import "@/styles/error.scss";
+import "@/styles/common.scss";
 import { baseMetaData } from "@/og";
 
 export const metadata: Metadata = baseMetaData;

@@ -1,14 +1,13 @@
 "use client";
 
-import Card from "@/components/card/Card";
-import styles from "@/styles/components/card.module.scss";
+import Card from "@/components/card/RecruitCard";
+import styles from "@/styles/components/recruit-card.module.scss";
 import { useAtom } from "jotai";
 import { SEARCH_KEYWORD_STORE } from "../store";
-import Image from "next/image";
-import icon_swimming from "../../../public/icon/swimming.gif";
 import { scaledPositionName } from "@/utils/common";
+import NotDataSwimming from "../common/not-data";
 
-type RecruitData = {
+export type RecruitData = {
   recruitmentNoticeId: number;
   categories: string[];
   clickCount: number;
@@ -79,15 +78,7 @@ export default function CardSection({ data }: { data: RecruitData[] }) {
           );
         })
       ) : (
-        <div className={styles.not__data}>
-          <Image
-            src={icon_swimming}
-            width={120}
-            height={120}
-            alt="해딩 기업의 공고가 존재하지 않아요"
-          />
-          <span> 웁스, 해당 기업의 공고가 존재하지 않아요</span>
-        </div>
+        <NotDataSwimming />
       )}
     </section>
   );
