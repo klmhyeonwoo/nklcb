@@ -1,5 +1,3 @@
-import Image from "next/image";
-import logo from "../../../public/images/logo.svg";
 import { api } from "@/api";
 import { Suspense } from "react";
 import TabSection from "@/components/tab/Section";

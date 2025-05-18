@@ -1,5 +1,3 @@
-import Image from "next/image";
-import logo from "../../public/images/logo.svg";
 import Banner from "@/components/common/banner";
 import { Fragment } from "react";
 import AnnounceCard from "@/components/card/AnnounceCard";

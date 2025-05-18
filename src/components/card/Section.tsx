@@ -4,8 +4,6 @@ import Card from "@/components/card/RecruitCard";
 import styles from "@/styles/components/recruit-card.module.scss";
 import { useAtom } from "jotai";
 import { SEARCH_KEYWORD_STORE } from "../store";
-import Image from "next/image";
-import icon_swimming from "../../../public/icon/swimming.gif";
 import { scaledPositionName } from "@/utils/common";
 import NotDataSwimming from "../common/not-data";
 
