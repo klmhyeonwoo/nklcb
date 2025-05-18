@@ -1,5 +1,5 @@
 "use client";
-import styles from "@/styles/components/card.module.scss";
+import styles from "@/styles/components/recruit-card.module.scss";
 import icon_arrow from "../../../public/icon/arrow_white.svg";
 import icon_calendar from "../../../public/icon/calendar.svg";
 import icon_calendar_light from "../../../public/icon/calendar_light.svg";

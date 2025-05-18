@@ -74,7 +74,7 @@ const scaledPositionName = (originalName: string) => {
     "engineering (platform)": "플랫폼 엔지니어링",
     "engineering (product)": "제품 엔지니어링",
     strategy: "전략",
-    "customer happiness": "고객행복",
+    "customer happiness": "고객지원",
     business: "비즈니스",
 
     /** L */
@@ -128,4 +128,12 @@ const formatDate = (dateString: string) => {
   }
 };
 
-export { scaledPositionName, formatDate };
+const scaledIndex = (index: number) => {
+  if (index < 10) {
+    return `0${index}`;
+  } else {
+    return `${index}`;
+  }
+};
+
+export { scaledPositionName, formatDate, scaledIndex };

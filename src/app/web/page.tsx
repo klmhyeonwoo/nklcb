@@ -1,7 +1,6 @@
 import { SERVICE_CATEGORY } from "@/utils/const";
 import { api } from "@/api";
 import CardSection from "@/components/card/Section";
-import "@/styles/style.scss";
 import SearchSection from "@/components/search/Section";
 import type { Metadata } from "next";
 import { Fragment, Suspense } from "react";
