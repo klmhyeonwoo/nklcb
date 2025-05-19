@@ -121,7 +121,7 @@ export default async function Home() {
           <AnnounceCard
             title="어제 인기있었던 공고"
             description="어제 조회수가 높았던 공고를 확인해보세요"
-            items={popularRecruitList}
+            items={popularRecruitList.slice(0, 10)}
           />
         </div>
       </article>
