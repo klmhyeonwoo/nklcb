@@ -58,7 +58,6 @@ async function getPopularRecruitData({
     };
     return scaledData;
   } catch (error) {
-    console.log(error);
     return { data: [], error };
   }
 }
