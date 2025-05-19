@@ -84,7 +84,7 @@ export default async function Home() {
         <HomeLogo />
         <div className="greeting__card__wrapper">
           <GreetingCard
-            title="빅테크 채용 공고"
+            title="빅테크 채용 공고 확인하기"
             description="네카라쿠배 채용 공고를 한 눈에 확인해보세요"
             image={greeting_image_eyes}
             navigate="web"
