@@ -8,6 +8,8 @@ import greeting_image_eyes from "../../public/images/eyes.gif";
 import greeting_image_waving from "../../public/images/waving.gif";
 import HomeLogo from "@/components/common/home-logo";
 
+export const dynamic = "force-dynamic";
+
 async function getRecruitData({
   params,
 }: {
