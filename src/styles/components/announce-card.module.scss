@@ -32,12 +32,13 @@
   width: 100%;
   display: flex;
   flex-direction: row;
+  font-size: 1.4rem;
   column-gap: 0.6rem;
   padding: 1.5rem 1rem;
   border-radius: 0.9rem;
   box-sizing: border-box;
-  cursor: pointer;
   transition: 0.4s all;
+  cursor: pointer;
 
   &:hover {
     background-color: var(--grey100);
