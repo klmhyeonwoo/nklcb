@@ -42,7 +42,7 @@ export default function generateServiceOpenGraph({
       : "네카라쿠배 채용",
     description: companyName
       ? `${companyName}의 최신 채용 정보를 확인해보세요`
-      : "내가 원했던 기업을 한 눈에 확인해보세요",
+      : "네카라쿠배(nklcb) 빅테크 기업의 공고를 한 눈에 확인해보세요",
     keywords: [
       "네카라쿠배 채용",
       "nklcb",
